@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taxhub-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: taxhub-api
+  template:
+    metadata:
+      labels:
+        app: taxhub-api
+    spec:
+      containers:
+        - name: taxhub-api
+          image: taxhub:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taxhub-api
+spec:
+  selector:
+    app: taxhub-api
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30080
+  type: NodePort

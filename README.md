@@ -24,13 +24,15 @@ make clean  # remove downloaded data and generated CSV
 **Local:**
 ```bash
 cd taxhub
-go run ./cmd/taxhub
+make run
 ```
+
+> Requires [`swag`](https://github.com/swaggo/swag) — installed automatically via `make run` if not present.
 
 **Docker:**
 ```bash
 cd taxhub
-docker build -t taxhub:local .
+make docker
 docker run -p 8080:8080 taxhub:local
 ```
 

@@ -1,6 +1,6 @@
 GOPATH := $(shell go env GOPATH)
 
-.PHONY: build run swag docker test clean
+.PHONY: build run swag docker test integration clean
 
 build:
 	go build -o bin/taxhub ./cmd/taxhub
@@ -15,8 +15,11 @@ swag: $(GOPATH)/bin/swag
 docker:
 	docker build -t taxhub:local .
 
-test:
+test: swag
 	go test ./...
+
+integration:
+	CSV_PATH=scientific_names.csv go test ./test/integration/... -tags integration -v
 
 clean:
 	rm -rf bin/ docs/

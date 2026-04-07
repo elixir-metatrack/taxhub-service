@@ -8,8 +8,8 @@ type TaxonResponse struct {
 
 // HealthResponse is the response for the health endpoint.
 type HealthResponse struct {
-	Status string `json:"status" example:"ok"`
-	Count  int    `json:"count"  example:"2498561"`
+	Status        string `json:"status"          example:"ok"`
+	TaxonCount int    `json:"taxon_count"  example:"2498561"`
 }
 
 // ErrorResponse is returned on error.

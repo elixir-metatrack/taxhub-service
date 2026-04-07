@@ -34,8 +34,8 @@ func New(taxonomy *service.Taxonomy, registry *prometheus.Registry) *Handler {
 func (h *Handler) Healthz(w http.ResponseWriter, r *http.Request) {
 	h.requestCount.WithLabelValues("healthz", "200").Inc()
 	writeJSON(w, http.StatusOK, model.HealthResponse{
-		Status: "ok",
-		Count:  h.taxonomy.Count(),
+		Status:        "ok",
+		TaxonCount: h.taxonomy.Count(),
 	})
 }
 

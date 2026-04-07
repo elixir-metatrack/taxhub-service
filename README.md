@@ -1,6 +1,6 @@
 # TaxHub
 
-HTTP service that maps NCBI Taxonomy IDs to scientific names. Data is sourced from the [NCBI taxdump](https://ftp.ncbi.nih.gov/pub/taxonomy/).
+HTTP service for resolving NCBI Taxonomy IDs to scientific names. It provides a lightweight API to look up taxonomy data sourced from the [NCBI taxdump](https://ftp.ncbi.nih.gov/pub/taxonomy/).
 
 ## Getting Started
 
@@ -22,6 +22,7 @@ make clean  # remove downloaded data and generated CSV
 ### 2. Run the Service
 
 **Local:**
+
 ```bash
 cd taxhub
 make run
@@ -30,6 +31,7 @@ make run
 > Requires [`swag`](https://github.com/swaggo/swag) — installed automatically via `make run` if not present.
 
 **Docker:**
+
 ```bash
 cd taxhub
 make docker
@@ -37,6 +39,7 @@ docker run -p 8080:8080 taxhub:local
 ```
 
 **Kubernetes (local):**
+
 ```bash
 kubectl apply -f taxhub/k8s/taxhub.yaml
 ```
@@ -44,13 +47,15 @@ kubectl apply -f taxhub/k8s/taxhub.yaml
 ## API
 
 ### `GET /healthz`
+
 Returns service status and number of loaded taxonomy entries.
 
 ```json
-{ "status": "ok", "count": 2498561 }
+{ "status": "ok", "taxon_count": 2498561 }
 ```
 
 ### `GET /taxon/:tax_id`
+
 Returns the scientific name for a given NCBI Taxonomy ID.
 
 ```json
